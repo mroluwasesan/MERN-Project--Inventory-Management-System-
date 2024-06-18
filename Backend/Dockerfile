@@ -1,11 +1,14 @@
 FROM node:22-alpine
 
-ENV MONGO_DB_USERAME=admin \
-    MONGO_DB_PWD=password
+WORKDIR home/app
 
-RUN mkdir -p home/myapp
+COPY package.json .
 
-COPY . /home/myapp
+RUN npm install
+
+COPY . /home/app
+
+EXPOSE 3000
 
 CMD ["node", "/home/myapp/index.js"]
 
